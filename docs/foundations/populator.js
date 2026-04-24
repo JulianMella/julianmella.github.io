@@ -7,12 +7,21 @@ if ("content" in document.createElement("template")) {
     const template = document.getElementById("article-template");
     const body = document.body;
 
-    // For each article you want to render:
+    const manifest = await fetch("textfiles/index.json").then(r => r.json());
 
-    const clone = template.content.cloneNode(true);
-    clone.querySelector(".article-title").textContent = "May 22, 2025";
-    clone.querySelector(".article-content").textContent = "hello world!";
-    body.appendChild(clone);
+    const articles = await Promise.all(
+        manifest.map(async (entry) => ({
+            title: entry.file.replace(/\.txt$/, ""),
+            body: await fetch(`textfiles/${entry.file}`).then(r => r.text())
+        }))
+    );
+
+    for (const article of articles) {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector(".article-title").textContent = article.title;
+        clone.querySelector(".article-content").textContent = article.body;
+        body.appendChild(clone);
+    }
 } else {
     // testmuai.com gives a 92% security score in regard to
     // how many browsers support it
