@@ -1,14 +1,12 @@
 name: Update index.json
 
-on: 
+on:
   push:
-    paths:
-      - 'textfiles/**'
     branches:
       - main
 
 permissions:
-  contents:  write
+  contents: write
 
 jobs:
   update-index:
@@ -20,17 +18,18 @@ jobs:
         run: |
           node -e "
             const fs = require('fs');
-            const files = fs.readdirSync('textfiles')
+            const dir = 'docs/foundations/textfiles';
+            const files = fs.readdirSync(dir)
               .filter(f => f.endsWith('.txt'))
               .sort().reverse()
               .map(f => ({ date: f.replace('.txt', ''), file: f }));
-            fs.writeFileSync('textfiles/index.json', JSON.stringify(files, null, 2));
+            fs.writeFileSync(dir + '/index.json', JSON.stringify(files, null, 2));
           "
       
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add textfiles/index.json
+          git add docs/foundations/textfiles/index.json
           git diff --staged --quiet || (git commit -m "Update index.json" && git push)
     
