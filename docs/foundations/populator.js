@@ -12,7 +12,7 @@ if ("content" in document.createElement("template")) {
     const articles = await Promise.all(
         manifest.map(async (entry) => ({
             title: entry.file.replace(/\.txt$/, ""),
-            body: await fetch(`textfiles/${entry.file}`).then(r => r.text())
+            body: await fetch(`textfiles/${entry.file}?v=${Date.now()}`).then(r => r.text())
         }))
     );
 
