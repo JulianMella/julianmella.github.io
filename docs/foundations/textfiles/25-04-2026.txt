@@ -2,6 +2,4 @@ I have been mostly using the Notes app to write all the things that I think abou
 
 The system will be relatively simple to begin with. I will create my own macOS app called Writer, where I can write texts which will be automatically uploaded to this website.
 
-I am now writing from the Writer app!
-
-Testing github push
+I am now writing from the Writer app and automatically pushing to GitHub!
