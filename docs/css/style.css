@@ -1,24 +1,8 @@
 body {
-    margin: 0;
-}
-
-.nav-test {
-    width: 100%;
-    height: 50px;
-    margin: 0;
-    padding: 0;
+    margin-left: 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.left {
-    width: 100%;
-    height: 100%;
-}
-
-.right {
-    width: 100%;
+    flex-direction: column;
+    gap: 16px;
 }
 
 a {
@@ -26,11 +10,18 @@ a {
     color: black;
 }
 
-.centered-list {
+.nav-list {
     display: flex;
     flex-direction: row;
     list-style: none;
     padding: 0;
     gap: 40px;
-    transform: translateX(var(--first-li-half-width));
+}
+
+.article-title {
+    font-weight: bold;
+}
+
+.article-content {
+    max-width: 400px;
 }

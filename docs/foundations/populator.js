@@ -5,7 +5,7 @@
 // "Initial test to see if the web browser supports templates"
 if ("content" in document.createElement("template")) {
     const template = document.getElementById("article-template");
-    const body = document.body;
+    const articles_container = document.querySelector(".articles-container");
 
     const manifest = await fetch("textfiles/index.json").then(r => r.json());
 
@@ -18,9 +18,9 @@ if ("content" in document.createElement("template")) {
 
     for (const article of articles) {
         const clone = template.content.cloneNode(true);
-        clone.querySelector(".article-title").textContent = article.title;
+        clone.querySelector(".article-title").textContent = formatDate(article.title);
         clone.querySelector(".article-content").textContent = article.body;
-        body.appendChild(clone);
+        articles_container.appendChild(clone);
     }
 } else {
     // testmuai.com gives a 92% security score in regard to
@@ -28,4 +28,11 @@ if ("content" in document.createElement("template")) {
 
     // I will most likely never add a significant edge case handler
     // here, I have enough to do!
+}
+
+
+function formatDate(input) {
+    const [day, month, year] = input.split("-");
+    const date = new Date(`${year}-${month}-${day}`);
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
