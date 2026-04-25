@@ -4,4 +4,4 @@ The system will be relatively simple to begin with. I will create my own macOS a
 
 I am now writing from the Writer app!
 
-The toolbar button in Writer app now automatically pushes to GitHub
+Testing github push
