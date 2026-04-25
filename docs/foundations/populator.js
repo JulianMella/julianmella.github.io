@@ -2,7 +2,7 @@
 // in textfiles. Those .txt files are produced with my personal app
 // called Writer.
 
-// "Initial test to see if the web browser supports templates"
+// Initial test to see if the web browser supports templates
 if ("content" in document.createElement("template")) {
     const template = document.getElementById("article-template");
     const articles_container = document.querySelector(".articles-container");
@@ -19,7 +19,19 @@ if ("content" in document.createElement("template")) {
     for (const article of articles) {
         const clone = template.content.cloneNode(true);
         clone.querySelector(".article-title").textContent = formatDate(article.title);
-        clone.querySelector(".article-content").textContent = article.body;
+
+        const contentEl = clone.querySelector(".article-content");
+        const paragraphs = article.body
+            .split(/\n\s*\n/)           // split on blank lines (handles \n\n, \r\n\r\n, lines with whitespace)
+            .map(p => p.trim())
+            .filter(p => p.length > 0); // drop empty chunks
+
+        for (const paragraph of paragraphs) {
+            const p = document.createElement("p");
+            p.textContent = paragraph;
+            contentEl.appendChild(p);
+        }
+
         articles_container.appendChild(clone);
     }
 } else {

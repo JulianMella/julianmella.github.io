@@ -1,0 +1,3 @@
+I have been mostly using the Notes app to write all the things that I think about. Although it works well to quickly write notes, it lacks the sense of structure that I want to have. Sure, I could make my own structure by creating folders and making sure that every title is properly named, but I want to have an automated process for this. Therefore, I picked this project back up to create my own system to write texts.
+
+The system will be relatively simple to begin with. I will create my own macOS app called Writer, where I can write texts which will be automatically uploaded to this website.
